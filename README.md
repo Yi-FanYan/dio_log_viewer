@@ -8,7 +8,7 @@
 A dio helper plug-in,captures requests and views them within the application,providing functions such as request replication and JSON expansion
 
 ## Preview
-![App preview](https://raw.githubusercontent.com/aiyakuaile/dio_log_viewer/main/preview.jpg)
+![App preview](https://raw.githubusercontent.com/aiyakuaile/dio_log_viewer/main/preview.png)
 
 ## Getting started
 
