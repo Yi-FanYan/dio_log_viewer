@@ -1,7 +1,7 @@
 
 
 # dio_log_viewer
-[![Pub](https://img.shields.io/pub/v/flutter_shake_animated.svg?style=flat-square)](https://github.com/aiyakuaile/flutter_shake_animated)
+[![Pub](https://img.shields.io/pub/v/dio_log_viewer.svg?style=flat-square)](https://github.com/aiyakuaile/flutter_shake_animated)
 [![support](https://img.shields.io/badge/platform-flutter%7Cflutter%20web%7Cdart%20vm-ff69b4.svg?style=flat-square)](https://github.com/aiyakuaile/flutter_shake_animated)
 
 ## Features
