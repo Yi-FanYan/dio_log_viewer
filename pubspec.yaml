@@ -1,7 +1,7 @@
 name: dio_log_viewer
 description: "A dio helper plug-in,captures requests and views them within the application, 
 providing functions such as request replication and JSON expansion"
-version: 1.0.2
+version: 1.0.3
 homepage: https://github.com/aiyakuaile/dio_log_viewer
 issue_tracker: https://github.com/aiyakuaile/dio_log_viewer/issues
 
