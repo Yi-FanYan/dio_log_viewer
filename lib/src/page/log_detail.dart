@@ -83,6 +83,10 @@ class _LogDetailState extends State<LogDetail>
               unselectedLabelColor: Colors.black,
               labelColor: Theme.of(context).primaryColor,
               indicatorPadding: const EdgeInsets.symmetric(horizontal: 20),
+              labelStyle:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+              unselectedLabelStyle:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
               tabs: const [
                 Tab(text: 'Request'),
                 Tab(text: 'Response'),

@@ -25,27 +25,8 @@ class _RequestPageState extends State<RequestPage>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             HeaderWidget(
-              title: 'Url',
-              result: widget.requestOptions.uri.toString(),
-            ),
-            HeaderWidget(
-              title: 'Method',
-              result: widget.requestOptions.method,
-            ),
-            HeaderWidget(
-              title: 'Duration',
-              result: {
-                'startTime':
-                    DateTime.fromMillisecondsSinceEpoch(widget.startTime)
-                        .toString(),
-                'endTime': widget.endTime != null
-                    ? DateTime.fromMillisecondsSinceEpoch(widget.endTime!)
-                        .toString()
-                    : '',
-                'duration': widget.endTime != null
-                    ? '${widget.endTime! - widget.startTime}ms'
-                    : '',
-              },
+              title: 'Url【${widget.requestOptions.method}】',
+              result: '${widget.requestOptions.uri}',
             ),
             if (widget.requestOptions.queryParameters.isNotEmpty)
               HeaderWidget(
@@ -62,6 +43,21 @@ class _RequestPageState extends State<RequestPage>
               title: 'Header',
               isShowSegment: true,
               result: widget.requestOptions.headers,
+            ),
+            HeaderWidget(
+              title: 'Duration',
+              result: {
+                'startTime':
+                    DateTime.fromMillisecondsSinceEpoch(widget.startTime)
+                        .toString(),
+                'endTime': widget.endTime != null
+                    ? DateTime.fromMillisecondsSinceEpoch(widget.endTime!)
+                        .toString()
+                    : '',
+                'duration': widget.endTime != null
+                    ? '${widget.endTime! - widget.startTime}ms'
+                    : '',
+              },
             ),
             const SizedBox(height: 20)
           ],

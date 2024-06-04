@@ -197,9 +197,6 @@ class _TryAgainPageState extends State<TryAgainPage>
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        HeaderWidget(
-                            title: 'Header',
-                            result: widget.entity.options.headers),
                         if (widget.entity.options.queryParameters.isNotEmpty)
                           HeaderWidget(
                             title: 'Parameters',
@@ -209,6 +206,9 @@ class _TryAgainPageState extends State<TryAgainPage>
                           HeaderWidget(
                               title: 'Body',
                               result: widget.entity.options.data),
+                        HeaderWidget(
+                            title: 'Header',
+                            result: widget.entity.options.headers),
                       ],
                     ),
                   )
@@ -245,6 +245,24 @@ class _TryAgainPageState extends State<TryAgainPage>
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      if (tempResult.response != null)
+                        HeaderWidget(
+                          title: 'Data',
+                          result: tempResult.response?.data,
+                          isShowSegment: true,
+                        ),
+                      if (tempResult.err != null)
+                        HeaderWidget(
+                          title: 'Error',
+                          result: tempResult.err.toString(),
+                          isShowSegment: true,
+                        ),
+                      if (tempResult.response != null)
+                        HeaderWidget(
+                          title: 'Header',
+                          result: tempResult.response!.headers.map,
+                          isShowSegment: true,
+                        ),
                       if (tempResult.endTime != null)
                         HeaderWidget(
                           title: 'Duration',
@@ -261,25 +279,7 @@ class _TryAgainPageState extends State<TryAgainPage>
                                 '${tempResult.endTime! - tempResult.startTime!}ms',
                           },
                           isShowSegment: true,
-                        ),
-                      if (tempResult.response != null)
-                        HeaderWidget(
-                          title: 'Header',
-                          result: tempResult.response!.headers.map,
-                          isShowSegment: true,
-                        ),
-                      if (tempResult.response != null)
-                        HeaderWidget(
-                          title: 'Data',
-                          result: tempResult.response?.data,
-                          isShowSegment: true,
-                        ),
-                      if (tempResult.err != null)
-                        HeaderWidget(
-                          title: 'Error',
-                          result: tempResult.err.toString(),
-                          isShowSegment: true,
-                        ),
+                        )
                     ],
                   ),
                 ),

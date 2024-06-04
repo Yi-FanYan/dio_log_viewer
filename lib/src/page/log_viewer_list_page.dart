@@ -53,21 +53,15 @@ class _LogViewerListPageState extends State<LogViewerListPage> {
               icon: const Icon(Icons.delete_forever_sharp)),
         ],
       ),
-      body: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxWidth != width) {
-          return const SizedBox();
-        }
-        return LoggerRequestViewer(
-          onChange: (ResultEntity res) {
-            Navigator.of(context).push(
-              CupertinoPageRoute(builder: (context) {
-                return LogDetail(entity: res);
-              }),
-            );
-          },
-        );
-      }),
+      body: LoggerRequestViewer(
+        onChange: (ResultEntity res) {
+          Navigator.of(context).push(
+            CupertinoPageRoute(builder: (context) {
+              return LogDetail(entity: res);
+            }),
+          );
+        },
+      ),
     );
   }
 }

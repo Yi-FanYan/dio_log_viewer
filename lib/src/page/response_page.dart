@@ -24,13 +24,13 @@ class _ResponsePageState extends State<ResponsePage>
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   HeaderWidget(
-                    title: 'Header',
-                    result: widget.response?.headers.map,
+                    title: 'Data',
+                    result: widget.response?.data,
                     isShowSegment: true,
                   ),
                   HeaderWidget(
-                    title: 'Data',
-                    result: widget.response?.data,
+                    title: 'Header',
+                    result: widget.response?.headers.map,
                     isShowSegment: true,
                   ),
                   const SizedBox(height: 20)
