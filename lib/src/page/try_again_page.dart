@@ -13,26 +13,32 @@ class TryAgainPage extends StatefulWidget {
   State<TryAgainPage> createState() => _TryAgainPageState();
 }
 
-class _TryAgainPageState extends State<TryAgainPage> with AutomaticKeepAliveClientMixin{
-  final decoration = BoxDecoration(borderRadius: BorderRadius.circular(8), color: Colors.white, boxShadow: [
-    BoxShadow(color: Colors.grey.withOpacity(0.1), blurRadius: 3.0, spreadRadius: 1.0),
-  ]);
+class _TryAgainPageState extends State<TryAgainPage>
+    with AutomaticKeepAliveClientMixin {
+  final decoration = BoxDecoration(
+      borderRadius: BorderRadius.circular(8),
+      color: Colors.white,
+      boxShadow: [
+        BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            blurRadius: 3.0,
+            spreadRadius: 1.0),
+      ]);
 
   late final _tempDio = Dio()
     ..options.copyWith(
-      method: widget.entity.options.method,
-      connectTimeout: widget.entity.options.connectTimeout,
-      receiveTimeout: widget.entity.options.receiveTimeout,
-      sendTimeout: widget.entity.options.sendTimeout,
-      contentType: widget.entity.options.contentType,
-      responseType: widget.entity.options.responseType,
-      extra: widget.entity.options.extra,
-      queryParameters: widget.entity.options.queryParameters,
-      validateStatus: widget.entity.options.validateStatus,
-      followRedirects: widget.entity.options.followRedirects,
-      maxRedirects: widget.entity.options.maxRedirects,
-      listFormat: widget.entity.options.listFormat
-    )
+        method: widget.entity.options.method,
+        connectTimeout: widget.entity.options.connectTimeout,
+        receiveTimeout: widget.entity.options.receiveTimeout,
+        sendTimeout: widget.entity.options.sendTimeout,
+        contentType: widget.entity.options.contentType,
+        responseType: widget.entity.options.responseType,
+        extra: widget.entity.options.extra,
+        queryParameters: widget.entity.options.queryParameters,
+        validateStatus: widget.entity.options.validateStatus,
+        followRedirects: widget.entity.options.followRedirects,
+        maxRedirects: widget.entity.options.maxRedirects,
+        listFormat: widget.entity.options.listFormat)
     ..interceptors.add(InterceptorsWrapper(onRequest: (options, handler) async {
       options.headers.addAll(widget.entity.options.headers);
       return handler.next(options); //continue
@@ -53,7 +59,8 @@ class _TryAgainPageState extends State<TryAgainPage> with AutomaticKeepAliveClie
       final res = await _tempDio.requestUri(
         widget.entity.options.uri,
         options: Options(method: widget.entity.options.method),
-        data: widget.entity.options.data ?? widget.entity.options.queryParameters,
+        data:
+            widget.entity.options.data ?? widget.entity.options.queryParameters,
       );
       tempResult.response = res;
     } on Exception catch (err) {
@@ -87,16 +94,22 @@ class _TryAgainPageState extends State<TryAgainPage> with AutomaticKeepAliveClie
                       margin: const EdgeInsets.only(right: 8),
                       padding: const EdgeInsets.symmetric(horizontal: 4),
                       decoration: BoxDecoration(
-                          color: MethodColorUtil.getMethodColor(widget.entity.options.method), borderRadius: BorderRadius.circular(2.0)),
+                          color: MethodColorUtil.getMethodColor(
+                              widget.entity.options.method),
+                          borderRadius: BorderRadius.circular(2.0)),
                       child: Text(
                         widget.entity.options.method,
-                        style: const TextStyle(color: Colors.white, fontSize: 12),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 12),
                       ),
                     ),
                   ),
                   TextSpan(
                       text: widget.entity.options.uri.toString(),
-                      style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 15))
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15))
                 ])),
                 const SizedBox(height: 15),
                 Material(
@@ -127,7 +140,10 @@ class _TryAgainPageState extends State<TryAgainPage> with AutomaticKeepAliveClie
                               ),
                             const Text(
                               'Try Now',
-                              style: TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
                             )
                           ],
                         ),
@@ -138,7 +154,11 @@ class _TryAgainPageState extends State<TryAgainPage> with AutomaticKeepAliveClie
           ),
           Container(
             margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
-            decoration: isExpandRequest ? BoxDecoration(color: Colors.blueGrey.withOpacity(0.1), borderRadius: BorderRadius.circular(8)) : decoration,
+            decoration: isExpandRequest
+                ? BoxDecoration(
+                    color: Colors.blueGrey.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(8))
+                : decoration,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -157,27 +177,38 @@ class _TryAgainPageState extends State<TryAgainPage> with AutomaticKeepAliveClie
                       children: [
                         const Text(
                           'Request',
-                          style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.black),
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
                         ),
                         const Spacer(),
-                        Icon(isExpandRequest ? Icons.arrow_drop_down : Icons.arrow_right)
+                        Icon(isExpandRequest
+                            ? Icons.arrow_drop_down
+                            : Icons.arrow_right)
                       ],
                     ),
                   ),
                 ),
                 if (isExpandRequest)
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 15.0, left: 12.0, right: 12.0),
+                    padding: const EdgeInsets.only(
+                        bottom: 15.0, left: 12.0, right: 12.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        HeaderWidget(title: 'Header', result: widget.entity.options.headers),
+                        HeaderWidget(
+                            title: 'Header',
+                            result: widget.entity.options.headers),
                         if (widget.entity.options.queryParameters.isNotEmpty)
                           HeaderWidget(
                             title: 'Parameters',
                             result: widget.entity.options.queryParameters,
                           ),
-                        if (widget.entity.options.data != null) HeaderWidget(title: 'Body', result: widget.entity.options.data),
+                        if (widget.entity.options.data != null)
+                          HeaderWidget(
+                              title: 'Body',
+                              result: widget.entity.options.data),
                       ],
                     ),
                   )
@@ -186,7 +217,9 @@ class _TryAgainPageState extends State<TryAgainPage> with AutomaticKeepAliveClie
           ),
           Container(
             margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
-            decoration: BoxDecoration(color: Colors.blueGrey.withOpacity(0.1),borderRadius: BorderRadius.circular(8)),
+            decoration: BoxDecoration(
+                color: Colors.blueGrey.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8)),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -196,11 +229,14 @@ class _TryAgainPageState extends State<TryAgainPage> with AutomaticKeepAliveClie
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: const Row(
                     children: [
-                       Text(
+                      Text(
                         'Response',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
                       ),
-                       Spacer()
+                      Spacer()
                     ],
                   ),
                 ),
@@ -213,9 +249,16 @@ class _TryAgainPageState extends State<TryAgainPage> with AutomaticKeepAliveClie
                         HeaderWidget(
                           title: 'Duration',
                           result: {
-                            'startTime': DateTime.fromMillisecondsSinceEpoch(tempResult.startTime!).toString(),
-                            'endTime': tempResult.endTime != null ? DateTime.fromMillisecondsSinceEpoch(tempResult.endTime!).toString() : '',
-                            'duration': '${tempResult.endTime! - tempResult.startTime!}ms',
+                            'startTime': DateTime.fromMillisecondsSinceEpoch(
+                                    tempResult.startTime!)
+                                .toString(),
+                            'endTime': tempResult.endTime != null
+                                ? DateTime.fromMillisecondsSinceEpoch(
+                                        tempResult.endTime!)
+                                    .toString()
+                                : '',
+                            'duration':
+                                '${tempResult.endTime! - tempResult.startTime!}ms',
                           },
                           isShowSegment: true,
                         ),
@@ -249,6 +292,7 @@ class _TryAgainPageState extends State<TryAgainPage> with AutomaticKeepAliveClie
       ),
     );
   }
+
   @override
   bool get wantKeepAlive => true;
 }

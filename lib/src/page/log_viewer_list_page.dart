@@ -19,7 +19,6 @@ class _LogViewerListPageState extends State<LogViewerListPage> {
 
   bool isRotate = true;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,14 +33,18 @@ class _LogViewerListPageState extends State<LogViewerListPage> {
                 });
               },
               icon: TweenAnimationBuilder(
-                tween: isRotate?Tween(begin: 0.0, end: 4 * pi):Tween(begin: 4 * pi, end: 0.0),
+                tween: isRotate
+                    ? Tween(begin: 0.0, end: 4 * pi)
+                    : Tween(begin: 4 * pi, end: 0.0),
                 duration: const Duration(milliseconds: 500),
-                builder: (context, double value, child){
+                builder: (context, double value, child) {
                   return Transform.rotate(
                     angle: value,
                     child: child,
                   );
-                },child: const Icon(Icons.refresh),)),
+                },
+                child: const Icon(Icons.refresh),
+              )),
           IconButton(
               onPressed: () {
                 LogMapUtil.removeLog();
@@ -50,7 +53,8 @@ class _LogViewerListPageState extends State<LogViewerListPage> {
               icon: const Icon(Icons.delete_forever_sharp)),
         ],
       ),
-      body: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      body: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
         if (constraints.maxWidth != width) {
           return const SizedBox();
         }
@@ -72,8 +76,6 @@ class LoggerRequestViewer extends StatelessWidget {
   final ValueChanged<ResultEntity>? onChange;
   const LoggerRequestViewer({super.key, this.onChange});
 
-
-
   @override
   Widget build(BuildContext context) {
     if (LogMapUtil.logList.isEmpty) {
@@ -87,14 +89,18 @@ class LoggerRequestViewer extends StatelessWidget {
           final res = LogMapUtil.resultById(LogMapUtil.logList[index]);
           if (res == null) return const SizedBox();
           final method = res.options.method;
-          final startTime = DateTime.fromMillisecondsSinceEpoch(res.startTime!).toString().split(' ').last;
+          final startTime = DateTime.fromMillisecondsSinceEpoch(res.startTime!)
+              .toString()
+              .split(' ')
+              .last;
           return RequestItem(
             method: method,
             link: res.options.uri.toString(),
             methodColor: MethodColorUtil.getMethodColor(method),
             isError: res.err != null,
             statusCode: res.response?.statusCode ?? 200,
-            time: res.endTime != null ? '${res.endTime! - res.startTime!}ms' : '',
+            time:
+                res.endTime != null ? '${res.endTime! - res.startTime!}ms' : '',
             startTime: startTime,
             onTap: () {
               onChange?.call(res);
@@ -134,15 +140,17 @@ class RequestItem extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.all(12),
-        decoration:
-            BoxDecoration(borderRadius: BorderRadius.circular(8), color: isError ? Colors.black : Colors.white, boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 10,
-            offset: const Offset(0, 1),
-          ),
-        ]),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: isError ? Colors.black : Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 1,
+                blurRadius: 10,
+                offset: const Offset(0, 1),
+              ),
+            ]),
         child: Column(
           children: [
             Row(
@@ -163,8 +171,13 @@ class RequestItem extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 4),
                   padding: const EdgeInsets.symmetric(horizontal: 2),
-                  decoration: BoxDecoration(border: Border.all(strokeAlign: BorderSide.strokeAlignOutside, width: 0.5, color: methodColor)),
-                  child: Text(time == ''?'Loading':time, style: TextStyle(color: methodColor, fontSize: 12)),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          strokeAlign: BorderSide.strokeAlignOutside,
+                          width: 0.5,
+                          color: methodColor)),
+                  child: Text(time == '' ? 'Loading' : time,
+                      style: TextStyle(color: methodColor, fontSize: 12)),
                 ),
                 const Spacer(),
                 Text(
@@ -175,7 +188,10 @@ class RequestItem extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text(link, style: TextStyle(color: isError? Colors.red:Colors.black, fontSize: 15)),
+              child: Text(link,
+                  style: TextStyle(
+                      color: isError ? Colors.red : Colors.black,
+                      fontSize: 15)),
             )
           ],
         ),

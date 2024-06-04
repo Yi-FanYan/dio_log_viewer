@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import '../page/log_viewer_list_page.dart';
 import 'package:flutter/material.dart';
 
-
 class DragButton extends StatefulWidget {
   const DragButton({super.key});
 
@@ -12,7 +11,6 @@ class DragButton extends StatefulWidget {
 }
 
 class _DragButtonState extends State<DragButton> {
-
   late final width = MediaQuery.of(context).size.width;
   late final height = MediaQuery.of(context).size.height;
   final dragButtonWidth = 70.0;
@@ -26,7 +24,10 @@ class _DragButtonState extends State<DragButton> {
 
   final duration = const Duration(milliseconds: 300);
 
-  Widget defaultWidget = const Text('Log',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),);
+  Widget defaultWidget = const Text(
+    'Log',
+    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+  );
 
   double _buttonOpacity = 1.0;
 
@@ -37,9 +38,9 @@ class _DragButtonState extends State<DragButton> {
       child: Stack(
         children: [
           AnimatedPositioned(
-            left: isFullScreen?0:left,
-            top: isFullScreen?0:top,
-            duration: isUpdatePan?Duration.zero:duration,
+            left: isFullScreen ? 0 : left,
+            top: isFullScreen ? 0 : top,
+            duration: isUpdatePan ? Duration.zero : duration,
             child: GestureDetector(
               onPanUpdate: (DragUpdateDetails details) {
                 setState(() {
@@ -48,19 +49,19 @@ class _DragButtonState extends State<DragButton> {
                   top += details.delta.dy;
                 });
               },
-              onPanEnd: (_){
-                if(left <= 0){
+              onPanEnd: (_) {
+                if (left <= 0) {
                   left = 15;
                 }
 
-                if(left+75 >=  width){
+                if (left + 75 >= width) {
                   left = width - 75;
                 }
 
-                if(top <= topGap){
+                if (top <= topGap) {
                   top = MediaQuery.of(context).padding.top;
                 }
-                if(top+dragButtonWidth >= height - bottomGap){
+                if (top + dragButtonWidth >= height - bottomGap) {
                   top = height - bottomGap - 75;
                 }
                 setState(() {
@@ -71,7 +72,8 @@ class _DragButtonState extends State<DragButton> {
                 setState(() {
                   _buttonOpacity = 0;
                 });
-                await Navigator.of(context).push(CupertinoPageRoute(builder: (context){
+                await Navigator.of(context)
+                    .push(CupertinoPageRoute(builder: (context) {
                   return const LogViewerListPage();
                 }));
                 setState(() {
@@ -82,11 +84,13 @@ class _DragButtonState extends State<DragButton> {
                 width: dragButtonWidth,
                 height: dragButtonWidth,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(isFullScreen?0:dragButtonWidth),
-                    color: isFullScreen?Colors.white:Theme.of(context).primaryColor.withOpacity(0.5)
-                ),
+                    borderRadius: BorderRadius.circular(
+                        isFullScreen ? 0 : dragButtonWidth),
+                    color: isFullScreen
+                        ? Colors.white
+                        : Theme.of(context).primaryColor.withOpacity(0.5)),
                 alignment: Alignment.center,
-                child:defaultWidget,
+                child: defaultWidget,
               ),
             ),
           )

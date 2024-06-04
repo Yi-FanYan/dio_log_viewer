@@ -38,7 +38,8 @@ class JsonObjectViewer extends StatefulWidget {
   final Map<String, dynamic> jsonObj;
   final bool notRoot;
 
-  const JsonObjectViewer(this.jsonObj, {super.key, this.notRoot = false, required this.colorTheme});
+  const JsonObjectViewer(this.jsonObj,
+      {super.key, this.notRoot = false, required this.colorTheme});
 
   @override
   JsonObjectViewerState createState() => JsonObjectViewerState();
@@ -58,17 +59,20 @@ class JsonObjectViewerState extends State<JsonObjectViewer> {
     if (widget.notRoot) {
       return Container(
         padding: const EdgeInsets.only(left: 14.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: _getList()),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start, children: _getList()),
       );
     }
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: _getList());
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.start, children: _getList());
   }
 
   _getList() {
     List<Widget> list = [];
     for (MapEntry entry in widget.jsonObj.entries) {
       if (openFlag[entry.key] == null) {
-        openFlag[entry.key] = widget.notRoot == false && _isExtensible(entry.value);
+        openFlag[entry.key] =
+            widget.notRoot == false && _isExtensible(entry.value);
       }
 
       list.add(Row(
@@ -79,7 +83,8 @@ class JsonObjectViewerState extends State<JsonObjectViewer> {
           getKeyWidget(entry),
           Text(':', style: TextStyle(color: widget.colorTheme.colon)),
           const SizedBox(width: 3),
-          _copyValue(context, _getValueWidget(entry.value, widget.colorTheme), entry.value),
+          _copyValue(context, _getValueWidget(entry.value, widget.colorTheme),
+              entry.value),
         ],
       ));
       list.add(const SizedBox(height: 4));
@@ -102,15 +107,18 @@ class JsonObjectViewerState extends State<JsonObjectViewer> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              (openFlag[entry.key] ?? false) ? const Icon(Icons.keyboard_arrow_down, size: 18) : const Icon(Icons.keyboard_arrow_right, size: 18),
-              Text(entry.key, style: TextStyle(color: widget.colorTheme.propertyKey)),
+              (openFlag[entry.key] ?? false)
+                  ? const Icon(Icons.keyboard_arrow_down, size: 18)
+                  : const Icon(Icons.keyboard_arrow_right, size: 18),
+              Text(entry.key,
+                  style: TextStyle(color: widget.colorTheme.propertyKey)),
             ],
           ));
     }
 
-    return Row(
-        children: [
-      const Icon(Icons.keyboard_arrow_right, color: Color.fromARGB(0, 0, 0, 0), size: 18),
+    return Row(children: [
+      const Icon(Icons.keyboard_arrow_right,
+          color: Color.fromARGB(0, 0, 0, 0), size: 18),
       Text(entry.key, style: TextStyle(color: widget.colorTheme.propertyKey)),
     ]);
   }
@@ -129,7 +137,8 @@ class JsonArrayViewer extends StatefulWidget {
   final List<dynamic> jsonArray;
   final bool notRoot;
 
-  const JsonArrayViewer(this.jsonArray, {super.key, this.notRoot = false, required this.colorTheme});
+  const JsonArrayViewer(this.jsonArray,
+      {super.key, this.notRoot = false, required this.colorTheme});
 
   @override
   State<JsonArrayViewer> createState() => _JsonArrayViewerState();
@@ -141,9 +150,14 @@ class _JsonArrayViewerState extends State<JsonArrayViewer> {
   @override
   Widget build(BuildContext context) {
     if (widget.notRoot) {
-      return Container(padding: const EdgeInsets.only(left: 14.0), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: _getList()));
+      return Container(
+          padding: const EdgeInsets.only(left: 14.0),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: _getList()));
     }
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: _getList());
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.start, children: _getList());
   }
 
   @override
@@ -162,12 +176,14 @@ class _JsonArrayViewerState extends State<JsonArrayViewer> {
           getKeyWidget(content, i),
           Text(':', style: TextStyle(color: widget.colorTheme.colon)),
           const SizedBox(width: 3),
-          _copyValue(context, _getValueWidget(content, widget.colorTheme), content)
+          _copyValue(
+              context, _getValueWidget(content, widget.colorTheme), content)
         ],
       ));
       list.add(const SizedBox(height: 4));
       if (openFlag[i]) {
-        list.add(JsonObjectViewerState.getContentWidget(content, widget.colorTheme));
+        list.add(
+            JsonObjectViewerState.getContentWidget(content, widget.colorTheme));
       }
       i++;
     }
@@ -185,15 +201,18 @@ class _JsonArrayViewerState extends State<JsonArrayViewer> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              openFlag[index] ? const Icon(Icons.keyboard_arrow_down, size: 18) : const Icon(Icons.keyboard_arrow_right, size: 18),
-              Text('[$index]', style: TextStyle(color: widget.colorTheme.propertyKey)),
+              openFlag[index]
+                  ? const Icon(Icons.keyboard_arrow_down, size: 18)
+                  : const Icon(Icons.keyboard_arrow_right, size: 18),
+              Text('[$index]',
+                  style: TextStyle(color: widget.colorTheme.propertyKey)),
             ],
           ));
     }
 
-    return Row(
-        children: [
-      const Icon(Icons.arrow_right, color: Color.fromARGB(0, 0, 0, 0), size: 18),
+    return Row(children: [
+      const Icon(Icons.arrow_right,
+          color: Color.fromARGB(0, 0, 0, 0), size: 18),
       Text('[$index]', style: TextStyle(color: widget.colorTheme.propertyKey)),
     ]);
   }
@@ -240,22 +259,23 @@ Widget _copyValue(BuildContext context, Widget child, Object? value) {
       child: child,
       onTap: () {
         final valueStr = value is String ? value : jsonEncode(value);
-        Clipboard.setData(ClipboardData(text: valueStr))
-            .then((res){
-            ScaffoldMessenger.of(context).showSnackBar(
-               SnackBar(
-                   duration: const Duration(seconds: 2),
-                   content: const Text("Copy Success!"),
-                   action: SnackBarAction(
-                       backgroundColor: Theme.of(context).primaryColor,
-                       textColor: Colors.white,
-                       label: 'HandleIt', onPressed: (){
-                        Navigator.of(context).push(CupertinoPageRoute(builder: (context){
-                          return JsonHandlePage(valueStr);
-                        }));
-                   }),
-               ),
-            );
+        Clipboard.setData(ClipboardData(text: valueStr)).then((res) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              duration: const Duration(seconds: 2),
+              content: const Text("Copy Success!"),
+              action: SnackBarAction(
+                  backgroundColor: Theme.of(context).primaryColor,
+                  textColor: Colors.white,
+                  label: 'HandleIt',
+                  onPressed: () {
+                    Navigator.of(context)
+                        .push(CupertinoPageRoute(builder: (context) {
+                      return JsonHandlePage(valueStr);
+                    }));
+                  }),
+            ),
+          );
         });
       },
     ),

@@ -21,7 +21,8 @@ class LogMapUtil {
 
     final key = options.hashCode;
     _logList.insert(0, key);
-    _logMap[key] = ResultEntity(options: options,startTime: DateTime.now().millisecondsSinceEpoch);
+    _logMap[key] = ResultEntity(
+        options: options, startTime: DateTime.now().millisecondsSinceEpoch);
   }
 
   static addErrorLog(dynamic error) {

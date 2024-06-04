@@ -7,17 +7,18 @@ import 'package:flutter/material.dart';
 
 class LogDetail extends StatefulWidget {
   final ResultEntity entity;
-  const LogDetail({super.key,required this.entity});
+  const LogDetail({super.key, required this.entity});
 
   @override
   State<LogDetail> createState() => _LogDetailState();
 }
 
-class _LogDetailState extends State<LogDetail> with SingleTickerProviderStateMixin{
-
+class _LogDetailState extends State<LogDetail>
+    with SingleTickerProviderStateMixin {
   String title = 'Request';
 
-  late final TabController _tabController = TabController(length: 4, vsync: this);
+  late final TabController _tabController =
+      TabController(length: 4, vsync: this);
 
   @override
   void initState() {
@@ -33,7 +34,7 @@ class _LogDetailState extends State<LogDetail> with SingleTickerProviderStateMix
   }
 
   void _handleTabChange() {
-    switch(_tabController.index) {
+    switch (_tabController.index) {
       case 0:
         title = 'Request';
         break;
@@ -55,42 +56,39 @@ class _LogDetailState extends State<LogDetail> with SingleTickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: TabBarView(
-          controller: _tabController,
-          children: [
-            RequestPage(widget.entity.options,widget.entity.startTime!,widget.entity.endTime),
-            ResponsePage(widget.entity.response),
-            ErrorPage(widget.entity.err),
-            TryAgainPage(widget.entity)
-          ]
-      ),
-      bottomNavigationBar: DecoratedBox(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3), // changes position of shadow
-            ),
-          ],
+        appBar: AppBar(
+          title: Text(title),
         ),
-        child: TabBar(
-        controller: _tabController,
-        unselectedLabelColor: Colors.black,
-        labelColor: Theme.of(context).primaryColor,
-        indicatorPadding: const EdgeInsets.symmetric(horizontal: 20),
-        tabs: const [
-          Tab(text: 'Request'),
-          Tab(text: 'Response'),
-          Tab(text: 'Error'),
-          Tab(text: 'TryAgain'),
+        body: TabBarView(controller: _tabController, children: [
+          RequestPage(widget.entity.options, widget.entity.startTime!,
+              widget.entity.endTime),
+          ResponsePage(widget.entity.response),
+          ErrorPage(widget.entity.err),
+          TryAgainPage(widget.entity)
         ]),
-      )
-    );
+        bottomNavigationBar: DecoratedBox(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: const Offset(0, 3), // changes position of shadow
+              ),
+            ],
+          ),
+          child: TabBar(
+              controller: _tabController,
+              unselectedLabelColor: Colors.black,
+              labelColor: Theme.of(context).primaryColor,
+              indicatorPadding: const EdgeInsets.symmetric(horizontal: 20),
+              tabs: const [
+                Tab(text: 'Request'),
+                Tab(text: 'Response'),
+                Tab(text: 'Error'),
+                Tab(text: 'TryAgain'),
+              ]),
+        ));
   }
 }

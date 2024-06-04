@@ -10,7 +10,11 @@ class HeaderWidget extends StatefulWidget {
   final String title;
   final bool isShowSegment;
   final dynamic result;
-  const HeaderWidget({super.key, required this.title, required this.result, this.isShowSegment = false});
+  const HeaderWidget(
+      {super.key,
+      required this.title,
+      required this.result,
+      this.isShowSegment = false});
 
   @override
   State<HeaderWidget> createState() => _HeaderWidgetState();
@@ -41,7 +45,8 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                   ),
                   Text(
                     widget.title,
-                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 15, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -53,7 +58,9 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                 children: [
                   IconButton(
                     onPressed: () {
-                      final res = widget.result is String ? widget.result : jsonEncode(widget.result);
+                      final res = widget.result is String
+                          ? widget.result
+                          : jsonEncode(widget.result);
                       Clipboard.setData(ClipboardData(text: res)).then((res) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
@@ -82,7 +89,10 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                       },
                       child: Text(
                         'Prettify',
-                        style: TextStyle(fontWeight: formatType == 'Prettify' ? FontWeight.bold : FontWeight.normal),
+                        style: TextStyle(
+                            fontWeight: formatType == 'Prettify'
+                                ? FontWeight.bold
+                                : FontWeight.normal),
                       )),
                   const DividerWidget(),
                   TextButton(
@@ -95,7 +105,10 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                       },
                       child: Text(
                         'Json',
-                        style: TextStyle(fontWeight: formatType == 'Json' ? FontWeight.bold : FontWeight.normal),
+                        style: TextStyle(
+                            fontWeight: formatType == 'Json'
+                                ? FontWeight.bold
+                                : FontWeight.normal),
                       )),
                   const DividerWidget(),
                   TextButton(
@@ -107,7 +120,10 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                       },
                       child: Text(
                         'Text',
-                        style: TextStyle(fontWeight: formatType == 'Text' ? FontWeight.bold : FontWeight.normal),
+                        style: TextStyle(
+                            fontWeight: formatType == 'Text'
+                                ? FontWeight.bold
+                                : FontWeight.normal),
                       )),
                 ],
               )

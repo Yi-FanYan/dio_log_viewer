@@ -5,7 +5,7 @@ import '../json/theme.dart';
 
 class JsonWrapWidget extends StatelessWidget {
   final dynamic value;
-  const JsonWrapWidget(this.value,{super.key});
+  const JsonWrapWidget(this.value, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,8 @@ class JsonWrapWidget extends StatelessWidget {
           ),
         ],
       ),
-      child: JsonViewer(value, colorTheme: ColorTheme.of(Theme.of(context).brightness)),
+      child: JsonViewer(value,
+          colorTheme: ColorTheme.of(Theme.of(context).brightness)),
     );
   }
 }

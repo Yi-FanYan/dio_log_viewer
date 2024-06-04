@@ -4,7 +4,6 @@ import 'package:dio_log_viewer/src/page/json_wrap_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
 class JsonHandlePage extends StatefulWidget {
   final String jsonStr;
   const JsonHandlePage(this.jsonStr, {super.key});
@@ -35,7 +34,8 @@ class _JsonHandlePageState extends State<JsonHandlePage> {
               Container(
                 margin: const EdgeInsets.only(top: 10),
                 padding: const EdgeInsets.all(12),
-                constraints: const BoxConstraints(maxHeight: 220, minWidth: double.infinity),
+                constraints: const BoxConstraints(
+                    maxHeight: 220, minWidth: double.infinity),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Colors.white,
@@ -130,8 +130,11 @@ class _JsonHandlePageState extends State<JsonHandlePage> {
                   Builder(builder: (context) {
                     return TextButton(
                         onPressed: () {
-                          Clipboard.setData(ClipboardData(text: _parseResult.toString())).then((value) {
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          Clipboard.setData(
+                                  ClipboardData(text: _parseResult.toString()))
+                              .then((value) {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
                               content: Text('Copy Success!'),
                               showCloseIcon: true,
                               closeIconColor: Colors.white,
