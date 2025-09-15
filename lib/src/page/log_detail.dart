@@ -87,7 +87,11 @@ class _LogDetailState extends State<LogDetail> with SingleTickerProviderStateMix
                 labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
                 unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
                 indicatorSize: TabBarIndicatorSize.tab,
-                indicator: CustomTabIndicator(color: Theme.of(context).primaryColor),
+                indicator: CustomTabIndicator(
+                  color: Theme.of(context).primaryColor,
+                  radius: 3,
+                  fixedWidth: 16,
+                ),
                 tabs: const [
                   Tab(text: 'Request'),
                   Tab(text: 'Response'),
