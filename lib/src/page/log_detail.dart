@@ -78,21 +78,24 @@ class _LogDetailState extends State<LogDetail>
               ),
             ],
           ),
-          child: TabBar(
-              controller: _tabController,
-              unselectedLabelColor: Colors.black,
-              labelColor: Theme.of(context).primaryColor,
-              indicatorPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelStyle:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-              unselectedLabelStyle:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-              tabs: const [
-                Tab(text: 'Request'),
-                Tab(text: 'Response'),
-                Tab(text: 'Error'),
-                Tab(text: 'TryAgain'),
-              ]),
+          child: SafeArea(
+            child: TabBar(
+                controller: _tabController,
+                unselectedLabelColor: Colors.black,
+                labelColor: Theme.of(context).primaryColor,
+                indicatorPadding: const EdgeInsets.symmetric(horizontal: 20),
+                labelStyle:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                unselectedLabelStyle:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                indicatorSize: TabBarIndicatorSize.tab,
+                tabs: const [
+                  Tab(text: 'Request'),
+                  Tab(text: 'Response'),
+                  Tab(text: 'Error'),
+                  Tab(text: 'TryAgain'),
+                ]),
+          ),
         ));
   }
 }
